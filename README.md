@@ -31,6 +31,6 @@ The code reproduces all numerical experiments from the paper, including:
 Clone the repository and install the required Python packages:
 
 ```bash
-git clone https://github.com/yourusername/tcur-hyperinterpolation.git
+git clone [https://github.com/yourusername/tcur-hyperinterpolation.git](https://github.com/chncml/tcur-hyperinterpolation)
 cd tcur-hyperinterpolation
 pip install -r requirements.txt
