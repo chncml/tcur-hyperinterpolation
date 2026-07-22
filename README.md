@@ -2,8 +2,8 @@
 
 This repository contains a Python implementation of the **TCUR** (Tensor Cross‑Approximation) algorithms for low‑rank approximation of hyperinterpolation operators, as described in the paper
 
-> *“Greedy Tensor Cross‑Approximation for Hyperinterpolation”*  
-> (Author names and reference details)
+> *“Intrinsic Low-Tucker-Rank Theory and Unified Tensor CUR Decomposition for High-Dimensional Hyperinterpolation”*  
+> (Maolin Che Yimin Wei and Chong Wu)
 
 The code reproduces all numerical experiments from the paper, including:
 
