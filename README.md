@@ -36,8 +36,16 @@ All dependencies are listed in `requirements.txt`.
 
 ---
 
-## Structure
+## Installation
 
+Clone the repository and install the required packages:
+
+```bash
+git clone https://github.com/your-username/tcur-tensor.git
+cd tcur-tensor
+pip install -r requirements.txt
+
+.
 ├── TCUR/                         # Core package
 │   ├── __init__.py
 │   ├── algorithms.py             # Algorithms 5.1, 5.2, 5.4 and tcur_to_tucker
@@ -58,4 +66,3 @@ All dependencies are listed in `requirements.txt`.
 ├── validation_tucker_rank_plot1.py          # Rank scaling plot for f2
 ├── validation_tucker_rank_plot2.py          # Rank vs ε for multiple functions
 └── requirements.txt
-
