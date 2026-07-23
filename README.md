@@ -1,64 +1,69 @@
-# TCUR – Tensor Cross‑Approximation for Hyperinterpolation
+# TCUR – Tensor Cross Approximation and Tucker Recompression
 
-This repository contains a Python implementation of the **TCUR** (Tensor Cross‑Approximation) algorithms for low‑rank approximation of hyperinterpolation operators, as described in the paper
+This repository provides a Python implementation of the **TCUR (Tensor Cross Approximation with Uniform Ranks)** algorithms introduced in the paper *"Intrinsic Low-Tucker-Rank Theory and Unified Tensor CUR Decomposition for High-Dimensional Hyperinterpolation"* ([reference details to be added](https://arxiv.org/pdf/2607.19741)). The package includes:
 
-> *“Intrinsic Low-Tucker-Rank Theory and Unified Tensor CUR Decomposition for High-Dimensional Hyperinterpolation”*  
-> (Maolin Che Yimin Wei and Chong Wu)
+- Three greedy algorithms for constructing a **TCUR decomposition**:
+  - **Algorithm 5.1** (factor‑based)
+  - **Algorithm 5.2** (core‑based)
+  - **Algorithm 5.4** (fiber‑based)
+- **Recompression** of a TCUR core into a Tucker format (Algorithm A.1).
+- **Error bounds** (Theorem 4.4 and Remark 4.9) and **ε‑Tucker rank** estimation.
+- Validation scripts that reproduce numerical experiments from the paper, including error tables, convergence plots, and slice comparisons.
 
-The code reproduces all numerical experiments from the paper, including:
+The code is built on top of **orthonormal Legendre polynomials** and **Gauss‑Legendre quadrature**, but the algorithms are general and can be adapted to other bases.
 
-- Greedy index selection algorithms (Algorithms 5.1, 5.2, 5.4)
-- TCUR‑to‑Tucker recompression (Algorithm A.1)
-- Error bounds (Theorem 4.4 and Remark 4.9)
-- Rank scaling with polynomial degree and tolerance
-- Performance comparisons on three test functions
+---
 
 ## Features
 
-- **Orthonormal Legendre basis** on `[-1,1]^d`
-- **Gauss‑Legendre quadrature** for discrete inner products
-- **Full coefficient tensor** computation (for small degrees)
-- **TCUR factor‑based and core‑based greedy algorithms**
-- **Fiber‑type TCUR** (Algorithm 5.4)
-- **TCUR → Tucker recompression** via QR + ST‑HOSVD
-- **Evaluation** of hyperinterpolation and Tucker/TCUR approximations at arbitrary points
-- **Theoretical error bound** computation (Theorem 4.4)
-- **ε‑Tucker rank search** and theoretical rank bounds (Theorem 4.1)
-- **Plotting scripts** for all figures in the paper
+- **Full coefficient tensor** computation via quadrature.
+- **Sub‑tensor extraction**, mode‑n unfolding, and Tucker operations.
+- **Greedy index set expansion** with stopping criteria based on smallest singular values.
+- **TCUR‑to‑Tucker** recompression with error bounds.
+- **End‑to‑end validation** for test functions \( f_1, f_2, f_3 \) (sharply peaked, smooth, oscillatory).
+- **Visualisation** of approximation slices, rank scaling, and error convergence.
+
+---
+
+## Requirements
+
+- Python 3.7+
+- NumPy
+- SciPy (for Legendre polynomials; falls back to `numpy.polynomial` if unavailable)
+- Matplotlib (for plotting scripts)
+
+All dependencies are listed in `requirements.txt`.
+
+---
 
 ## Installation
 
-Clone the repository and install the required Python packages:
+Clone the repository and install the required packages:
 
 ```bash
-git clone https://github.com/chncml/tcur-hyperinterpolation
-cd tcur-hyperinterpolation
+git clone https://github.com/your-username/tcur-tensor.git
+cd tcur-tensor
 pip install -r requirements.txt
 
-## Structure
-
-tcur-hyperinterpolation/
-├── tcur/                          # Core library
-│   ├── __init__.py                # Exports all public functions
-│   ├── basis.py                   # LegendreBasis class
-│   ├── quadrature.py              # Gauss‑Legendre quadrature
-│   ├── tensor_ops.py              # Unfolding, Tucker reconstruction, ST‑HOSVD
-│   ├── coefficient.py             # Inner products, coefficient tensor, subtensor extraction
-│   ├── algorithms.py              # Algorithms 5.1, 5.2, 5.4 and TCUR→Tucker
-│   ├── evaluation.py              # Evaluation of approximations
-│   ├── error_bounds.py            # Theoretical error bounds and rank search
-│   ├── utils.py                   # Helper functions
-│   └── test_functions.py          # f1, f2, f3 (and f3_nd)
-├── experiments/                   # All validation and plotting scripts
-│   ├── cross_function_performance.py
-│   ├── cross_function_plot.py
-│   ├── greedy_performance.py
-│   ├── greedy_convergence_plot.py
-│   ├── recompression_validation.py
-│   ├── error_bounds_validation.py
-│   ├── tucker_rank_validation.py
-│   ├── rank_scaling_plot.py
-│   ├── rank_eps_plot.py
-│   └── low_rank_comparison.py     # (uses TensorLy)
-├── README.md
+## Structures
+├── TCUR/                         # Core package
+│   ├── __init__.py
+│   ├── algorithms.py             # Algorithms 5.1, 5.2, 5.4 and tcur_to_tucker
+│   ├── basis.py                  # LegendreBasis class
+│   ├── coefficient.py            # Coefficient tensor computation
+│   ├── error_bounds.py           # Error bounds and ε‑rank search
+│   ├── evaluation.py             # Evaluation of approximations on points
+│   ├── quadrature.py             # Gauss‑Legendre quadrature
+│   ├── tensor_ops.py             # Unfolding, reconstruction, ST‑HOSVD
+│   └── utils.py                  # Helper functions
+├── Cross_Function_Performance.py            # End‑to‑end error chain (Table 6.10 style)
+├── Cross_Function_Performance_plot.py       # Slice plots for f2
+├── Greedy_TCUR_Algorithm_Performance.py     # Compares algorithms with different b, τ
+├── Greedy_TCUR_Algorithm_Performance_plot.py # Convergence plot of tol
+├── TCUR_to_Tucker_Recompression.py          # Validates Theorem A.1 with plots
+├── Unified_TCUR_Error_Bounds.py             # Validates Theorem 4.4 and Remark 4.9
+├── validation_tucker_rank.py                # Rank scaling vs degree, ε, dimension
+├── validation_tucker_rank_plot1.py          # Rank scaling plot for f2
+├── validation_tucker_rank_plot2.py          # Rank vs ε for multiple functions
 └── requirements.txt
+
