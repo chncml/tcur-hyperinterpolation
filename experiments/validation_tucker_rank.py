@@ -11,9 +11,19 @@ from TCUR.quadrature import gauss_legendre
 from TCUR.tensor_ops import mode_n_unfold, st_hosvd, reconstruct_tucker
 from TCUR.coefficient import compute_full_coefficient_tensor
 from TCUR.error_bounds import find_epsilon_tucker_rank, theoretical_rank_bounds
-from TCUR.test_functions import f1, f2, f3
 
-# ===== Additional test function for higher dimensions =====
+# ===== Test functions =====
+
+def f1(x, y, z):
+    r2 = x**2 + y**2 + z**2
+    return np.exp(-1.0 / (r2 + 1e-15))
+
+def f2(x, y, z):
+    return 1.0 / (np.cosh(3 * (x + y + z))) ** 2
+
+def f3(x, y, z):
+    return np.cos(2 * np.pi * x)**2 + np.cos(2 * np.pi * y)**2 + np.cos(2 * np.pi * z)**2
+    
 def f3_nd(*args):
     """Additive version of f3 for arbitrary dimension."""
     return sum(np.cos(2 * np.pi * arg) ** 2 for arg in args)
