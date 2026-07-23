@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors  # 新增
-from src import (
+from TCUR import (
     LegendreBasis, gauss_legendre,
     algorithm_5_1, algorithm_5_2, algorithm_5_4,
     compute_full_coefficient_tensor, reconstruct_tucker,
