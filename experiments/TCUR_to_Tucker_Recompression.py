@@ -8,10 +8,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 # ===== Imports from the src package =====
-from src import LegendreBasis, gauss_legendre
-from src.algorithms import algorithm_5_2, tcur_to_tucker
-from src.coefficient import compute_full_coefficient_tensor
-from src.tensor_ops import mode_n_unfold, reconstruct_tucker
+from TCUR import LegendreBasis, gauss_legendre
+from TCUR.algorithms import algorithm_5_2, tcur_to_tucker
+from TCUR.coefficient import compute_full_coefficient_tensor
+from TCUR.tensor_ops import mode_n_unfold, reconstruct_tucker
 
 # ===== Helper: recompression bound (Theorem A.1) with extra info =====
 def compute_recompression_bound_with_sum(full_tensor, G, factors, I_sets, target_ranks):
