@@ -13,6 +13,16 @@ from TCUR.algorithms import algorithm_5_2, tcur_to_tucker
 from TCUR.coefficient import compute_full_coefficient_tensor
 from TCUR.tensor_ops import mode_n_unfold, reconstruct_tucker
 
+def f1(x, y, z):
+    r2 = x**2 + y**2 + z**2
+    return np.exp(-1.0 / (r2 + 1e-15))
+
+def f2(x, y, z):
+    return 1.0 / (np.cosh(3 * (x + y + z))) ** 2
+
+def f3(x, y, z):
+    return np.cos(2 * np.pi * x)**2 + np.cos(2 * np.pi * y)**2 + np.cos(2 * np.pi * z)**2
+    
 # ===== Helper: recompression bound (Theorem A.1) with extra info =====
 def compute_recompression_bound_with_sum(full_tensor, G, factors, I_sets, target_ranks):
     
@@ -114,16 +124,6 @@ def plot_recompression_errors(full_tensor, G, factors, I_sets, target_ranks_list
 
 # ===== Validation driver (with table and plots) =====
 def validate_recompression_with_plot():
-    """
-    Runs the full validation:
-      - computes full coefficient tensor for f2,
-      - runs Algorithm 5.2 to get TCUR,
-      - recompresses to Tucker for target ranks,
-      - prints a table and generates diagnostic plots.
-    """
-    # Test function (same as in the paper)
-    def f2(x, y, z):
-        return 1.0 / (np.cosh(3 * (x + y + z))) ** 2
 
     N = 3
     I = 30
@@ -174,9 +174,6 @@ def validate_recompression_with_plot():
 
 # ===== Optional: original validate_recompression (without plots) =====
 def validate_recompression():
-    """Same as above but without plotting (kept for compatibility)."""
-    def f2(x, y, z):
-        return 1.0 / (np.cosh(3 * (x + y + z))) ** 2
 
     N = 3
     I = 30
